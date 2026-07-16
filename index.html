@@ -532,8 +532,17 @@
 
     // ── Countdown ── 26.06.27 17:00 KST
     const concertDate = new Date('2026-06-27T17:00:00+09:00');
+    const concertEndDate = new Date('2026-06-27T19:00:00+09:00'); // 공연 종료(예상) 시각 - 필요시 조정
     function updateCountdown() {
-      const diff = concertDate - new Date();
+      const now = new Date();
+      const diff = concertDate - now;
+
+      if (now >= concertEndDate) {
+        document.getElementById('countdown').innerHTML =
+          '<span style="font-family:var(--font-mono);color:var(--pink);font-size:1.1rem;letter-spacing:.08em">🎉 공연 완료!</span>';
+        return;
+      }
+
       if (diff <= 0) {
         document.getElementById('countdown').innerHTML =
           '<span style="font-family:var(--font-mono);color:var(--pink);font-size:1.1rem;letter-spacing:.08em">🎸 공연 중!</span>';
